@@ -30,4 +30,10 @@ public class LambdaDemo {
     public static IntStream transform(IntStream stream, IntUnaryOperator op) {
         return stream.map(op);
     }
+
+    public static final Function<List<Integer>, Integer> sum = l -> l.stream().
+            reduce(0, Integer::sum);
+
+    public static final Function<List<Integer>, Integer> product = l -> l.stream().
+            reduce(0, (left, right) -> left * right);
 }

@@ -1,7 +1,5 @@
 package lambdas;
 
-import lambdas.person.v1.Person;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Date;
@@ -20,8 +18,6 @@ public class LambdaDemo {
 //    public static final Function<String, Integer> splitAndCount = s -> split.
 //            andThen(count).
 //            apply(s);
-
-    public static final Function<String, Person> create = Person::new;
 
     public static final BiFunction<Double, Double, Double> reference = Math::max;
 

@@ -1,5 +1,7 @@
 package lambdas.person.v1;
 
+import java.util.function.Function;
+
 public class Person {
     private String name;
 
@@ -14,4 +16,6 @@ public class Person {
     public void setName(final String name) {
         this.name = name;
     }
+
+    public static final Function<String, Person> create = Person::new;
 }

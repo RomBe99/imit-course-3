@@ -2,7 +2,6 @@ package lambdas.person.v4;
 
 import java.util.List;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class Person {
     private String name;
@@ -29,9 +28,7 @@ public class Person {
         return age;
     }
 
-    public static final Function<List<Person>, List<Person>> sortByNameLength = l -> l.stream().
-            filter(p -> p.getAge() >= 30).
-            collect(Collectors.toList());
+    public static final Function<List<Person>, List<Person>> sortByNameLength = null;
 
     public static final Function<List<Person>, List<Person>> sortByEqualsName = null;
 }

@@ -27,9 +27,11 @@ public class LambdaDemo {
 
     public static final BiPredicate<Integer, Integer> areEqual = Integer::equals;
 
-    public static IntStream transform(IntStream stream, IntUnaryOperator op) {
-        return stream.map(op);
-    }
+//    public static IntStream transform(IntStream stream, IntUnaryOperator op) {
+//        return stream.map(op);
+//    }
+
+    public static final BiFunction<IntStream, IntUnaryOperator, IntStream> transform = IntStream::map;
 
     public static final Function<List<Integer>, Integer> sum = l -> l.stream().
             reduce(Integer::sum).orElse(0);

@@ -37,7 +37,6 @@ public class Person {
         return father;
     }
 
-    // TODO Можно ли иначе?
     public Person getMothersMotherFather() {
         final int DEPTH = 2;
         Person temp = this;
@@ -45,9 +44,9 @@ public class Person {
         for (int i = 0; i < DEPTH; i++) {
             if (temp.mother == null) {
                 return null;
-            } else {
-                temp = temp.mother;
             }
+
+            temp = temp.mother;
         }
 
         return temp.father;

@@ -1,11 +1,9 @@
-package lambdas.person.v3;
-
-import java.util.Optional;
+package ru.omsu.imit.lambdas.person.v2;
 
 public class Person {
     private String name;
-    private Optional<Person> mother;
-    private Optional<Person> father;
+    private Person mother;
+    private Person father;
 
     public Person(final String name, final Person mother, final Person father) {
         setName(name);
@@ -18,11 +16,11 @@ public class Person {
     }
 
     public void setMother(final Person mother) {
-        this.mother = Optional.ofNullable(mother);
+        this.mother = mother;
     }
 
     public void setFather(final Person father) {
-        this.father = Optional.ofNullable(father);
+        this.father = father;
     }
 
     public String getName() {
@@ -30,17 +28,26 @@ public class Person {
     }
 
     public Person getMother() {
-        return mother.orElse(null);
+        return mother;
     }
 
     public Person getFather() {
-        return father.orElse(null);
+        return father;
     }
 
+    // TODO Можно ли иначе?
     public Person getMothersMotherFather() {
-        return mother.
-                flatMap(m -> m.mother).
-                flatMap(m -> m.father).
-                orElse(null);
+        final int DEPTH = 2;
+        Person temp = this;
+
+        for (int i = 0; i < DEPTH; i++) {
+            if (temp.mother == null) {
+                return null;
+            } else {
+                temp = temp.mother;
+            }
+        }
+
+        return temp.father;
     }
 }

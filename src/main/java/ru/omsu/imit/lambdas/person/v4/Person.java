@@ -1,4 +1,4 @@
-package lambdas.person.v4;
+package ru.omsu.imit.lambdas.person.v4;
 
 import java.util.List;
 import java.util.function.Function;

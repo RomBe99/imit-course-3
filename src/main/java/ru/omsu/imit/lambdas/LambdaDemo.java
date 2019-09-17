@@ -1,4 +1,4 @@
-package lambdas;
+package ru.omsu.imit.lambdas;
 
 import java.util.Arrays;
 import java.util.List;

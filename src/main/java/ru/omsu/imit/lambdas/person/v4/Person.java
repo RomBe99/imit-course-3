@@ -1,7 +1,6 @@
 package ru.omsu.imit.lambdas.person.v4;
 
-import java.util.List;
-import java.util.function.Function;
+import java.util.Objects;
 
 public class Person {
     private String name;
@@ -28,7 +27,17 @@ public class Person {
         return age;
     }
 
-    public static final Function<List<Person>, List<Person>> sortByNameLength = null;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return age == person.age &&
+                Objects.equals(name, person.name);
+    }
 
-    public static final Function<List<Person>, List<Person>> sortByEqualsName = null;
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, age);
+    }
 }

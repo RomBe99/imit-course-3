@@ -1,5 +1,7 @@
 package ru.omsu.imit.lambdas.person.v2;
 
+import java.util.Objects;
+
 public class Person {
     private String name;
     private Person mother;
@@ -49,5 +51,20 @@ public class Person {
         }
 
         return temp.father;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return Objects.equals(name, person.name) &&
+                Objects.equals(mother, person.mother) &&
+                Objects.equals(father, person.father);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, mother, father);
     }
 }

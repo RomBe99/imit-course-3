@@ -32,8 +32,8 @@ public class LambdaDemo {
     }
 
     public static final Function<List<Integer>, Integer> sum = l -> l.stream().
-            reduce(0, Integer::sum);
+            reduce(Integer::sum).orElse(0);
 
     public static final Function<List<Integer>, Integer> product = l -> l.stream().
-            reduce(0, (left, right) -> left * right);
+            reduce((left, right) -> left * right).orElse(0);
 }

@@ -1,7 +1,9 @@
-package ru.omsu.imit.lambdas.person.v4;
+package ru.omsu.imit.lambdas.lambdas.person.v4;
 
 import org.junit.Assert;
 import org.junit.Test;
+import ru.omsu.imit.lambdas.person.v4.Person;
+import ru.omsu.imit.lambdas.person.v4.PersonProcessor;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,9 +1,10 @@
-package ru.omsu.imit.lambdas.person.v2;
+package ru.omsu.imit.lambdas.lambdas.person.v2;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import ru.omsu.imit.lambdas.person.v2.Person;
 
 import java.util.Arrays;
 import java.util.Collection;

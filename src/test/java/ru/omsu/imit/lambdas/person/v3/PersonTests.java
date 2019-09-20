@@ -1,4 +1,4 @@
-package ru.omsu.imit.lambdas.lambdas.person.v3;
+package ru.omsu.imit.lambdas.person.v3;
 
 import org.junit.Assert;
 import org.junit.Test;

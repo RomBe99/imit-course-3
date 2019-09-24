@@ -24,7 +24,7 @@ public class NIODemoTests extends Assert {
             assertArrayEquals(expectedInts, ACTUAL);
         } finally {
             if (FILE_FOR_WRITE_AND_READ.exists()) {
-                FILE_FOR_WRITE_AND_READ.delete();
+                assertTrue(FILE_FOR_WRITE_AND_READ.delete());
             }
         }
     }

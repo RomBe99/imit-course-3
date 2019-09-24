@@ -1,45 +1,45 @@
 package ru.omsu.imit.nio;
 
-import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
-import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 
 public class NIODemo {
     private NIODemo() {
     }
 
-    // TODO Не уверен, что чтение из файла реализованно как задумывалось, однако оно работает корректно
     public static int[] writeAndReadNumbersFromFile(final File file) throws IOException {
-        final int SIZE = 100;
-        int[] intsForWrite = new int[SIZE];
+        final int ARRAY_SIZE = 100;
+        int[] intsForWrite = new int[ARRAY_SIZE];
 
-        for (int i = 0; i < SIZE; i++) {
+        for (int i = 0; i < ARRAY_SIZE; i++) {
             intsForWrite[i] = i;
         }
 
-        try (FileChannel fc = (FileChannel) Files.newByteChannel(file.toPath(),
+        try (FileChannel fc = FileChannel.open(file.toPath(),
                 file.exists() ? StandardOpenOption.WRITE : StandardOpenOption.CREATE_NEW, StandardOpenOption.WRITE)) {
-            StringBuilder sb = new StringBuilder();
+
+            final int BUFFER_SIZE = Integer.SIZE / 8 * ARRAY_SIZE;
+
+            ByteBuffer mbb = MappedByteBuffer.allocate(BUFFER_SIZE);
 
             for (int i : intsForWrite) {
-                sb.append(i).append(" ");
+                mbb.putInt(i);
             }
 
-            fc.write(MappedByteBuffer.wrap(sb.toString().getBytes()));
+            fc.write(mbb.flip());
         }
 
-        int[] result = new int[SIZE];
+        int[] result = new int[ARRAY_SIZE];
 
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            String[] data = br.readLine().split(" ");
-
-            for (int i = 0; i < SIZE; i++) {
-                result[i] = Integer.parseInt(data[i]);
+        try (DataInputStream dis = new DataInputStream(new FileInputStream(file))) {
+            for (int i = 0; i < ARRAY_SIZE; i++) {
+                result[i] = dis.readInt();
             }
         }
 

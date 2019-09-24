@@ -6,7 +6,6 @@ import java.io.PrintStream;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 
 public class TraineeProcessor {
@@ -22,7 +21,7 @@ public class TraineeProcessor {
     }
 
     public static Trainee readTraineeFromTextFileWithByteBuffer(final File file) throws IOException, TraineeException {
-        try (FileChannel fc = (FileChannel) Files.newByteChannel(file.toPath(), StandardOpenOption.READ)) {
+        try (FileChannel fc = FileChannel.open(file.toPath(), StandardOpenOption.READ)) {
             if (fc.size() == 0) {
                 return null;
             }
@@ -31,14 +30,14 @@ public class TraineeProcessor {
 
             fc.read(bb);
 
-            String[] data = new String(bb.array(), StandardCharsets.UTF_8).split(" ");
+            String[] data = new String(StandardCharsets.UTF_8.decode(bb).array()).split(" ");
 
             return new Trainee(data[0], data[1], Integer.parseInt(data[2]));
         }
     }
 
     public static Trainee readTraineeFromTextFileWithMappedByteBuffer(final File file) throws IOException, TraineeException {
-        try (FileChannel fc = (FileChannel) Files.newByteChannel(file.toPath(), StandardOpenOption.READ)) {
+        try (FileChannel fc = FileChannel.open(file.toPath(), StandardOpenOption.READ)) {
             ByteBuffer mbb = fc.map(FileChannel.MapMode.READ_ONLY, 0, fc.size());
 
             if (mbb != null) {

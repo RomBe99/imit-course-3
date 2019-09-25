@@ -21,22 +21,13 @@ public class TraineeProcessor {
     }
 
     public static void writeTraineeToFileWithByteBuffer(final File file, final Trainee trainee) throws IOException {
-        final char[] FIRST_NAME_CHARS = trainee.getFirstName().toCharArray();
-        final char[] LAST_NAME_CHARS = trainee.getLastName().toCharArray();
-        final int BUFFER_SIZE = FIRST_NAME_CHARS.length * Character.SIZE / 8 + LAST_NAME_CHARS.length * Character.SIZE / 8 + Integer.SIZE / 8;
+        final byte[] DATA = trainee.toString().getBytes();
+        final int BUFFER_SIZE = DATA.length;
 
         try (FileChannel fc = FileChannel.open(file.toPath(), StandardOpenOption.CREATE_NEW, StandardOpenOption.WRITE)) {
             ByteBuffer bb = ByteBuffer.allocate(BUFFER_SIZE);
 
-            for (char c : FIRST_NAME_CHARS) {
-                bb.putChar(c);
-            }
-
-            for (char c : LAST_NAME_CHARS) {
-                bb.putChar(c);
-            }
-
-            bb.putInt(trainee.getMark());
+            bb.put(DATA);
             fc.write(bb.flip());
         }
     }

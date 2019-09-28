@@ -17,12 +17,15 @@ public class NIODemoTests extends Assert {
         }
 
         final File FILE_FOR_WRITE_AND_READ = new File("ints.txt");
-        final int[] ACTUAL = NIODemo.writeAndReadNumbersFromFile(FILE_FOR_WRITE_AND_READ);
 
-        if (FILE_FOR_WRITE_AND_READ.exists()) {
-            FILE_FOR_WRITE_AND_READ.delete();
+        try {
+            final int[] ACTUAL = NIODemo.writeAndReadNumbersFromFile(FILE_FOR_WRITE_AND_READ);
+
+            assertArrayEquals(expectedInts, ACTUAL);
+        } finally {
+            if (FILE_FOR_WRITE_AND_READ.exists()) {
+                assertTrue(FILE_FOR_WRITE_AND_READ.delete());
+            }
         }
-
-        assertArrayEquals(expectedInts, ACTUAL);
     }
 }

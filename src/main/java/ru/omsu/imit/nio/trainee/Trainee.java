@@ -63,4 +63,9 @@ public class Trainee {
     public int hashCode() {
         return Objects.hash(firstName, lastName, mark);
     }
+
+    @Override
+    public String toString() {
+        return firstName + ' ' + lastName + ' ' + mark;
+    }
 }

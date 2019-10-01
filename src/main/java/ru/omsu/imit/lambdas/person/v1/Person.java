@@ -1,7 +1,7 @@
 package ru.omsu.imit.lambdas.person.v1;
 
 import java.util.Objects;
-import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
 public class Person {
     private String name;
@@ -18,7 +18,7 @@ public class Person {
         this.name = name;
     }
 
-    public static final Function<String, Person> create = Person::new;
+    public static final UnaryOperator<Person> create = p -> p != null ? new Person(p.name) : null;
 
     @Override
     public boolean equals(Object o) {

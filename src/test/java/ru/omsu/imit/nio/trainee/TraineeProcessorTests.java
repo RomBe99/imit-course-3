@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
 
 public class TraineeProcessorTests extends Assert {
     @Test
@@ -22,9 +23,7 @@ public class TraineeProcessorTests extends Assert {
 
             assertEquals(TRAINEE_FOR_TEST, ACTUAL);
         } finally {
-            if (FILE_FOR_TEST.exists()) {
-                assertTrue(FILE_FOR_TEST.delete());
-            }
+            Files.deleteIfExists(FILE_FOR_TEST.toPath());
         }
     }
 
@@ -39,9 +38,7 @@ public class TraineeProcessorTests extends Assert {
 
             assertNull(ACTUAL);
         } finally {
-            if (FILE_FOR_READ.exists()) {
-                assertTrue(FILE_FOR_READ.delete());
-            }
+            Files.deleteIfExists(FILE_FOR_READ.toPath());
         }
     }
 
@@ -57,9 +54,7 @@ public class TraineeProcessorTests extends Assert {
 
             assertEquals(TRAINEE_FOR_TEST, ACTUAL);
         } finally {
-            if (FILE_FOR_TEST.exists()) {
-                assertTrue(FILE_FOR_TEST.delete());
-            }
+            Files.deleteIfExists(FILE_FOR_TEST.toPath());
         }
     }
 
@@ -74,9 +69,7 @@ public class TraineeProcessorTests extends Assert {
 
             assertNull(ACTUAL);
         } finally {
-            if (FILE_FOR_READ.exists()) {
-                assertTrue(FILE_FOR_READ.delete());
-            }
+            Files.deleteIfExists(FILE_FOR_READ.toPath());
         }
     }
 
@@ -92,9 +85,7 @@ public class TraineeProcessorTests extends Assert {
 
             assertEquals(TRAINEE_FOR_TEST, ACTUAL);
         } finally {
-            if (FILE_FOR_TEST.exists()) {
-                assertTrue(FILE_FOR_TEST.delete());
-            }
+            Files.deleteIfExists(FILE_FOR_TEST.toPath());
         }
     }
 }

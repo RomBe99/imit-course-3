@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 
 public class NIODemoTests extends Assert {
     @Test
@@ -23,9 +24,7 @@ public class NIODemoTests extends Assert {
 
             assertArrayEquals(expectedInts, ACTUAL);
         } finally {
-            if (FILE_FOR_WRITE_AND_READ.exists()) {
-                assertTrue(FILE_FOR_WRITE_AND_READ.delete());
-            }
+            Files.deleteIfExists(FILE_FOR_WRITE_AND_READ.toPath());
         }
     }
 }

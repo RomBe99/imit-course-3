@@ -1,13 +1,8 @@
 package ru.omsu.imit.nio;
 
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.nio.ByteBuffer;
+import java.io.*;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
-import java.nio.file.StandardOpenOption;
 
 public class NIODemo {
     private NIODemo() {
@@ -21,12 +16,11 @@ public class NIODemo {
             intsForWrite[i] = i;
         }
 
-        try (FileChannel fc = FileChannel.open(file.toPath(),
-                file.exists() ? StandardOpenOption.WRITE : StandardOpenOption.CREATE_NEW, StandardOpenOption.WRITE)) {
+        try (FileChannel fc = new RandomAccessFile(file, "rw").getChannel()) {
 
-            final int BUFFER_SIZE = Integer.SIZE / 8 * ARRAY_SIZE;
+            final int BUFFER_SIZE = Integer.BYTES * ARRAY_SIZE;
 
-            ByteBuffer mbb = MappedByteBuffer.allocate(BUFFER_SIZE);
+            MappedByteBuffer mbb = fc.map(FileChannel.MapMode.READ_WRITE, 0, BUFFER_SIZE);
 
             for (int i : intsForWrite) {
                 mbb.putInt(i);

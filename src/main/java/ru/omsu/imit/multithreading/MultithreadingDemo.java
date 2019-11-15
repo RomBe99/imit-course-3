@@ -5,6 +5,8 @@ import ru.omsu.imit.multithreading.thread.task3.ThreadSecondThread;
 import ru.omsu.imit.multithreading.thread.task3.ThreadThirdThread;
 import ru.omsu.imit.multithreading.thread.task4.ThreadForAdd;
 import ru.omsu.imit.multithreading.thread.task4.ThreadForRemove;
+import ru.omsu.imit.multithreading.thread.task5.ArrayListOperations;
+import ru.omsu.imit.multithreading.thread.task5.ThreadForArrayListOperations;
 
 import java.util.ArrayList;
 
@@ -38,7 +40,7 @@ public class MultithreadingDemo {
     }
 
     public static void task4() {
-        final int SIZE = 10;
+        final int SIZE = 10000;
 
         ArrayList<Integer> list = new ArrayList<>(SIZE);
         ThreadForAdd threadForAdd = new ThreadForAdd(list, SIZE);
@@ -46,14 +48,14 @@ public class MultithreadingDemo {
 
         threadForAdd.start();
         threadForRemove.start();
+    }
 
-        try {
-            threadForAdd.join();
-            threadForRemove.join();
+    public static void task5() {
+        final int SIZE = 10000;
 
-            System.out.println(list.isEmpty());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        ArrayList<Integer> list = new ArrayList<>(SIZE);
+        Thread t = new ThreadForArrayListOperations(new ArrayListOperations(list, SIZE));
+
+        t.start();
     }
 }

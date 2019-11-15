@@ -3,21 +3,20 @@ package ru.omsu.imit.multithreading;
 import ru.omsu.imit.multithreading.thread.task3.ThreadFirstThread;
 import ru.omsu.imit.multithreading.thread.task3.ThreadSecondThread;
 import ru.omsu.imit.multithreading.thread.task3.ThreadThirdThread;
+import ru.omsu.imit.multithreading.thread.task4.ThreadForAdd;
+import ru.omsu.imit.multithreading.thread.task4.ThreadForRemove;
 
-import java.util.StringJoiner;
+import java.util.ArrayList;
 
 public class MultithreadingDemo {
-    public static String printAllCurrentThreadProperties() {
+    public static void printAllCurrentThreadProperties() {
         Thread currentThread = Thread.currentThread();
 
-        StringJoiner sj = new StringJoiner("\n");
-        sj.add(currentThread.getName());
-        sj.add(String.valueOf(currentThread.getId()));
-        sj.add(String.valueOf(currentThread.getPriority()));
-        sj.add(String.valueOf(currentThread.getState()));
-        sj.add(String.valueOf(currentThread.getThreadGroup()));
-
-        return sj.toString();
+        System.out.println(currentThread.getName());
+        System.out.println(currentThread.getId());
+        System.out.println(currentThread.getPriority());
+        System.out.println(currentThread.getState());
+        System.out.println(currentThread.getThreadGroup());
     }
 
     public static void startThreeThreads() {
@@ -33,6 +32,26 @@ public class MultithreadingDemo {
             t1.join();
             t2.join();
             t3.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void task4() {
+        final int SIZE = 10;
+
+        ArrayList<Integer> list = new ArrayList<>(SIZE);
+        ThreadForAdd threadForAdd = new ThreadForAdd(list, SIZE);
+        ThreadForRemove threadForRemove = new ThreadForRemove(list);
+
+        threadForAdd.start();
+        threadForRemove.start();
+
+        try {
+            threadForAdd.join();
+            threadForRemove.join();
+
+            System.out.println(list.isEmpty());
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

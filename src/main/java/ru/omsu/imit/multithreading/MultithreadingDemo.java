@@ -7,8 +7,11 @@ import ru.omsu.imit.multithreading.thread.task4.ThreadForAdd;
 import ru.omsu.imit.multithreading.thread.task4.ThreadForRemove;
 import ru.omsu.imit.multithreading.thread.task5.ArrayListOperations;
 import ru.omsu.imit.multithreading.thread.task5.ThreadForArrayListOperations;
+import ru.omsu.imit.multithreading.thread.task6.ThreadForClear;
+import ru.omsu.imit.multithreading.thread.task6.ThreadForFill;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MultithreadingDemo {
     public static void printAllCurrentThreadProperties() {
@@ -57,5 +60,16 @@ public class MultithreadingDemo {
         Thread t = new ThreadForArrayListOperations(new ArrayListOperations(list, SIZE));
 
         t.start();
+    }
+
+    public static void task6() {
+        final int SIZE = 10000;
+        ArrayList<Integer> synchList = new ArrayList<>(Collections.synchronizedList(new ArrayList<>(SIZE)));
+
+        Thread threadForFill = new ThreadForFill(synchList, SIZE);
+        Thread threadForClear = new ThreadForClear(synchList);
+
+        threadForFill.start();
+        threadForClear.start();
     }
 }

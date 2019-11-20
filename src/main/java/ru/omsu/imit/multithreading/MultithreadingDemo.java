@@ -9,9 +9,14 @@ import ru.omsu.imit.multithreading.thread.task5.ArrayListOperations;
 import ru.omsu.imit.multithreading.thread.task5.ThreadForArrayListOperations;
 import ru.omsu.imit.multithreading.thread.task6.ThreadForClear;
 import ru.omsu.imit.multithreading.thread.task6.ThreadForFill;
+import ru.omsu.imit.multithreading.thread.task7.ThreadPing;
+import ru.omsu.imit.multithreading.thread.task7.ThreadPong;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Semaphore;
+import java.util.concurrent.TimeUnit;
 
 public class MultithreadingDemo {
     public static void printAllCurrentThreadProperties() {
@@ -71,5 +76,12 @@ public class MultithreadingDemo {
 
         threadForFill.start();
         threadForClear.start();
+    }
+
+    public static void task7() {
+        Semaphore semaphore = new Semaphore(2, true);
+
+        Executors.newSingleThreadScheduledExecutor().scheduleWithFixedDelay(new ThreadPing(semaphore), 0, 1, TimeUnit.SECONDS);
+        Executors.newSingleThreadScheduledExecutor().scheduleWithFixedDelay(new ThreadPong(semaphore), 0, 1, TimeUnit.SECONDS);
     }
 }

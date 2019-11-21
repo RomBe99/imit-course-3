@@ -79,9 +79,9 @@ public class MultithreadingDemo {
     }
 
     public static void task7() {
-        Semaphore semaphore = new Semaphore(2, true);
+        Semaphore semaphore = new Semaphore(1, true);
 
-        Executors.newSingleThreadScheduledExecutor().scheduleWithFixedDelay(new ThreadPing(semaphore), 0, 1, TimeUnit.SECONDS);
-        Executors.newSingleThreadScheduledExecutor().scheduleWithFixedDelay(new ThreadPong(semaphore), 0, 1, TimeUnit.SECONDS);
+        Executors.newSingleThreadScheduledExecutor().scheduleWithFixedDelay(new ThreadPing(semaphore), 0, 1, TimeUnit.MILLISECONDS);
+        Executors.newSingleThreadScheduledExecutor().scheduleWithFixedDelay(new ThreadPong(semaphore), 0, 1, TimeUnit.MILLISECONDS);
     }
 }

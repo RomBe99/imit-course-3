@@ -14,6 +14,9 @@ import ru.omsu.imit.multithreading.thread.task6.ListRemoveThreadT6;
 import ru.omsu.imit.multithreading.thread.task7.Game;
 import ru.omsu.imit.multithreading.thread.task7.PingThread;
 import ru.omsu.imit.multithreading.thread.task7.PongThread;
+import ru.omsu.imit.multithreading.thread.task8.Book;
+import ru.omsu.imit.multithreading.thread.task8.ReaderThread;
+import ru.omsu.imit.multithreading.thread.task8.WriterThread;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -111,6 +114,23 @@ public class MultithreadingDemo {
             ping.join();
             pong.join();
         } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void task8() {
+        Book book = new Book();
+
+        ReaderThread reader =  new ReaderThread(book);
+        WriterThread writer =  new WriterThread(book);
+
+        reader.start();
+        writer.start();
+
+        try{
+            reader.join();
+            writer.join();
+        }catch (InterruptedException e) {
             e.printStackTrace();
         }
     }

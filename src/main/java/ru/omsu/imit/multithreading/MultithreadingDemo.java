@@ -5,6 +5,9 @@ import ru.omsu.imit.multithreading.thread.task3.ThreadSecondThread;
 import ru.omsu.imit.multithreading.thread.task3.ThreadThirdThread;
 import ru.omsu.imit.multithreading.thread.task4.ListAddThreadT4;
 import ru.omsu.imit.multithreading.thread.task4.ListRemoveThreadT4;
+import ru.omsu.imit.multithreading.thread.task5.ListAddThreadT5;
+import ru.omsu.imit.multithreading.thread.task5.ListRemoveThreadT5;
+import ru.omsu.imit.multithreading.thread.task5.ListSyncProcessor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,15 +43,32 @@ public class MultithreadingDemo {
 
     public static void task4() {
         List<Integer> list = new ArrayList<>();
-        Thread listThread1T4 = new ListRemoveThreadT4(list);
-        Thread listThread2T4 = new ListAddThreadT4(list);
+        Thread t1 = new ListRemoveThreadT4(list);
+        Thread t2 = new ListAddThreadT4(list);
 
-        listThread1T4.start();
-        listThread2T4.start();
+        t1.start();
+        t2.start();
 
         try{
-            listThread1T4.join();
-            listThread2T4.join();
+            t1.join();
+            t2.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void task5() {
+        ListSyncProcessor processor = new ListSyncProcessor(new ArrayList<>());
+
+        Thread t1 = new ListRemoveThreadT5(processor);
+        Thread t2 = new ListAddThreadT5(processor);
+
+        t1.start();
+        t2.start();
+
+        try{
+            t1.join();
+            t2.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

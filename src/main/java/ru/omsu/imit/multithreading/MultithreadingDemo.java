@@ -3,6 +3,11 @@ package ru.omsu.imit.multithreading;
 import ru.omsu.imit.multithreading.thread.task3.ThreadFirstThread;
 import ru.omsu.imit.multithreading.thread.task3.ThreadSecondThread;
 import ru.omsu.imit.multithreading.thread.task3.ThreadThirdThread;
+import ru.omsu.imit.multithreading.thread.task4.ListAddThreadT4;
+import ru.omsu.imit.multithreading.thread.task4.ListRemoveThreadT4;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MultithreadingDemo {
     public static void printAllCurrentThreadProperties() {
@@ -28,6 +33,22 @@ public class MultithreadingDemo {
             t1.join();
             t2.join();
             t3.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void task4() {
+        List<Integer> list = new ArrayList<>();
+        Thread listThread1T4 = new ListRemoveThreadT4(list);
+        Thread listThread2T4 = new ListAddThreadT4(list);
+
+        listThread1T4.start();
+        listThread2T4.start();
+
+        try{
+            listThread1T4.join();
+            listThread2T4.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

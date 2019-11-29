@@ -3,20 +3,6 @@ package ru.omsu.imit.multithreading;
 import ru.omsu.imit.multithreading.thread.task3.ThreadFirstThread;
 import ru.omsu.imit.multithreading.thread.task3.ThreadSecondThread;
 import ru.omsu.imit.multithreading.thread.task3.ThreadThirdThread;
-import ru.omsu.imit.multithreading.thread.task4.ThreadForAdd;
-import ru.omsu.imit.multithreading.thread.task4.ThreadForRemove;
-import ru.omsu.imit.multithreading.thread.task5.ArrayListOperations;
-import ru.omsu.imit.multithreading.thread.task5.ThreadForArrayListOperations;
-import ru.omsu.imit.multithreading.thread.task6.ThreadForClear;
-import ru.omsu.imit.multithreading.thread.task6.ThreadForFill;
-import ru.omsu.imit.multithreading.thread.task7.ThreadPing;
-import ru.omsu.imit.multithreading.thread.task7.ThreadPong;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Semaphore;
-import java.util.concurrent.TimeUnit;
 
 public class MultithreadingDemo {
     public static void printAllCurrentThreadProperties() {
@@ -45,43 +31,5 @@ public class MultithreadingDemo {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
-
-    public static void task4() {
-        final int SIZE = 10000;
-
-        ArrayList<Integer> list = new ArrayList<>(SIZE);
-        ThreadForAdd threadForAdd = new ThreadForAdd(list, SIZE);
-        ThreadForRemove threadForRemove = new ThreadForRemove(list);
-
-        threadForAdd.start();
-        threadForRemove.start();
-    }
-
-    public static void task5() {
-        final int SIZE = 10000;
-
-        ArrayList<Integer> list = new ArrayList<>(SIZE);
-        Thread t = new ThreadForArrayListOperations(new ArrayListOperations(list, SIZE));
-
-        t.start();
-    }
-
-    public static void task6() {
-        final int SIZE = 10000;
-        ArrayList<Integer> synchList = new ArrayList<>(Collections.synchronizedList(new ArrayList<>(SIZE)));
-
-        Thread threadForFill = new ThreadForFill(synchList, SIZE);
-        Thread threadForClear = new ThreadForClear(synchList);
-
-        threadForFill.start();
-        threadForClear.start();
-    }
-
-    public static void task7() {
-        Semaphore semaphore = new Semaphore(1, true);
-
-        Executors.newSingleThreadScheduledExecutor().scheduleWithFixedDelay(new ThreadPing(semaphore), 0, 1, TimeUnit.MILLISECONDS);
-        Executors.newSingleThreadScheduledExecutor().scheduleWithFixedDelay(new ThreadPong(semaphore), 0, 1, TimeUnit.MILLISECONDS);
     }
 }

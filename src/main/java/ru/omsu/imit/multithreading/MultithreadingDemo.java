@@ -11,6 +11,9 @@ import ru.omsu.imit.multithreading.thread.task5.ListSyncProcessor;
 import ru.omsu.imit.multithreading.thread.task6.ListAddThreadT6;
 import ru.omsu.imit.multithreading.thread.task6.ListProcessor;
 import ru.omsu.imit.multithreading.thread.task6.ListRemoveThreadT6;
+import ru.omsu.imit.multithreading.thread.task7.Game;
+import ru.omsu.imit.multithreading.thread.task7.PingThread;
+import ru.omsu.imit.multithreading.thread.task7.PongThread;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -53,7 +56,7 @@ public class MultithreadingDemo {
         t1.start();
         t2.start();
 
-        try{
+        try {
             t1.join();
             t2.join();
         } catch (InterruptedException e) {
@@ -70,7 +73,7 @@ public class MultithreadingDemo {
         t1.start();
         t2.start();
 
-        try{
+        try {
             t1.join();
             t2.join();
         } catch (InterruptedException e) {
@@ -90,6 +93,23 @@ public class MultithreadingDemo {
         try {
             t1.join();
             t2.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void task7() {
+        Game game = new Game();
+
+        Thread ping = new PingThread(game);
+        Thread pong = new PongThread(game);
+
+        ping.start();
+        pong.start();
+
+        try {
+            ping.join();
+            pong.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

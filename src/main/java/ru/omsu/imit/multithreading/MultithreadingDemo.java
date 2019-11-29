@@ -8,8 +8,12 @@ import ru.omsu.imit.multithreading.thread.task4.ListRemoveThreadT4;
 import ru.omsu.imit.multithreading.thread.task5.ListAddThreadT5;
 import ru.omsu.imit.multithreading.thread.task5.ListRemoveThreadT5;
 import ru.omsu.imit.multithreading.thread.task5.ListSyncProcessor;
+import ru.omsu.imit.multithreading.thread.task6.ListAddThreadT6;
+import ru.omsu.imit.multithreading.thread.task6.ListProcessor;
+import ru.omsu.imit.multithreading.thread.task6.ListRemoveThreadT6;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MultithreadingDemo {
@@ -67,6 +71,23 @@ public class MultithreadingDemo {
         t2.start();
 
         try{
+            t1.join();
+            t2.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void task6() {
+        ListProcessor processor = new ListProcessor(Collections.synchronizedList(new ArrayList<>()));
+
+        Thread t1 = new ListRemoveThreadT6(processor);
+        Thread t2 = new ListAddThreadT6(processor);
+
+        t1.start();
+        t2.start();
+
+        try {
             t1.join();
             t2.join();
         } catch (InterruptedException e) {

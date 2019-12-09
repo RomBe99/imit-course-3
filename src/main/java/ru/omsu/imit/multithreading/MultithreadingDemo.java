@@ -1,5 +1,8 @@
 package ru.omsu.imit.multithreading;
 
+import ru.omsu.imit.multithreading.thread.task11.GameRL;
+import ru.omsu.imit.multithreading.thread.task11.PingThreadRL;
+import ru.omsu.imit.multithreading.thread.task11.PongThreadRL;
 import ru.omsu.imit.multithreading.thread.task3.ThreadFirstThread;
 import ru.omsu.imit.multithreading.thread.task3.ThreadSecondThread;
 import ru.omsu.imit.multithreading.thread.task3.ThreadThirdThread;
@@ -121,16 +124,33 @@ public class MultithreadingDemo {
     public static void task8() {
         Book book = new Book();
 
-        ReaderThread reader =  new ReaderThread(book);
-        WriterThread writer =  new WriterThread(book);
+        ReaderThread reader = new ReaderThread(book);
+        WriterThread writer = new WriterThread(book);
 
         reader.start();
         writer.start();
 
-        try{
+        try {
             reader.join();
             writer.join();
-        }catch (InterruptedException e) {
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void task11() {
+        GameRL game = new GameRL();
+
+        Thread ping = new PingThreadRL(game);
+        Thread pong = new PongThreadRL(game);
+
+        ping.start();
+        pong.start();
+
+        try {
+            ping.join();
+            pong.join();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }

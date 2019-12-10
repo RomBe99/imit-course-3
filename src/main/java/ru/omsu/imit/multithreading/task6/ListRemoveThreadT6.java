@@ -1,4 +1,4 @@
-package ru.omsu.imit.multithreading.thread.task6;
+package ru.omsu.imit.multithreading.task6;
 
 public class ListRemoveThreadT6 extends Thread {
     private ListProcessor processor;

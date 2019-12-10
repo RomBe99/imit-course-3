@@ -1,4 +1,4 @@
-package ru.omsu.imit.multithreading.thread.task4;
+package ru.omsu.imit.multithreading.task4;
 
 import java.util.List;
 

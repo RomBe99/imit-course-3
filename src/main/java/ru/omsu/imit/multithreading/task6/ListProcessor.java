@@ -1,15 +1,15 @@
-package ru.omsu.imit.multithreading.thread.task5;
+package ru.omsu.imit.multithreading.task6;
 
 import java.util.List;
 
-public class ListSyncProcessor {
+public class ListProcessor {
     private List<Integer> list;
 
-    public ListSyncProcessor(List<Integer> list) {
+    public ListProcessor(List<Integer> list) {
         this.list = list;
     }
 
-    public synchronized void removeRandomElement() {
+    public void removeRandomElement() {
         int n;
 
         for (int i = 0; !list.isEmpty(); i++) {
@@ -19,7 +19,7 @@ public class ListSyncProcessor {
         }
     }
 
-    public synchronized void addRandomElem(){
+    public void addRandomElem(){
         if(!list.isEmpty()) {
             return;
         }

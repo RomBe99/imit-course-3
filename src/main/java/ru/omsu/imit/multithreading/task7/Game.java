@@ -1,4 +1,4 @@
-package ru.omsu.imit.multithreading.thread.task7;
+package ru.omsu.imit.multithreading.task7;
 
 import java.util.concurrent.Semaphore;
 

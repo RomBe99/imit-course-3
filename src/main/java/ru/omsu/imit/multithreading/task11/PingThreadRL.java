@@ -1,4 +1,4 @@
-package ru.omsu.imit.multithreading.thread.task11;
+package ru.omsu.imit.multithreading.task11;
 
 public class PingThreadRL extends Thread {
     private GameRL game;

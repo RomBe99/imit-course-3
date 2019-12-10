@@ -1,4 +1,4 @@
-package ru.omsu.imit.multithreading.thread.task8;
+package ru.omsu.imit.multithreading.task8;
 
 public class WriterThread extends Thread {
     private Book book;

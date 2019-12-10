@@ -1,4 +1,4 @@
-package ru.omsu.imit.multithreading.thread.task3;
+package ru.omsu.imit.multithreading.task3;
 
 public class ThreadFirstThread extends Thread {
     public ThreadFirstThread(final String name) {

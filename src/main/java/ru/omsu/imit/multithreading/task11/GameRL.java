@@ -1,4 +1,4 @@
-package ru.omsu.imit.multithreading.thread.task11;
+package ru.omsu.imit.multithreading.task11;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;

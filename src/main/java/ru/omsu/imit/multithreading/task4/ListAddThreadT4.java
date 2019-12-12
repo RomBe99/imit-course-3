@@ -3,17 +3,19 @@ package ru.omsu.imit.multithreading.task4;
 import java.util.List;
 
 public class ListAddThreadT4 extends Thread {
-    private List<Integer> list;
+    private final List<Integer> list;
+    private int iterations;
 
-    public ListAddThreadT4(List<Integer> list) {
+    public ListAddThreadT4(List<Integer> list, int iterations) {
         this.list = list;
+        this.iterations = iterations;
     }
 
     @Override
     public void run() {
         int n;
 
-        while (true) {
+        for (int i = 0; i < iterations; i++) {
             synchronized (list) {
                 if (!list.isEmpty()) {
                     continue;
@@ -21,7 +23,7 @@ public class ListAddThreadT4 extends Thread {
 
                 n = (int) (Math.random() * 10);
 
-                for (int i = 0; i < 10; i++) {
+                for (int j = 0; j < 10; j++) {
                     list.add(n);
                     System.out.println(n);
                 }

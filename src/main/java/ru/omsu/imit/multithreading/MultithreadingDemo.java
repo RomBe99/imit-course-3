@@ -54,10 +54,12 @@ public class MultithreadingDemo {
         }
     }
 
+    // fixme
     public static void task4() {
+        final int iterations = 10000;
         List<Integer> list = new ArrayList<>();
-        Thread t1 = new ListRemoveThreadT4(list);
-        Thread t2 = new ListAddThreadT4(list);
+        Thread t1 = new ListRemoveThreadT4(list, iterations);
+        Thread t2 = new ListAddThreadT4(list, iterations);
 
         t1.start();
         t2.start();
@@ -70,11 +72,13 @@ public class MultithreadingDemo {
         }
     }
 
+    // fixme
     public static void task5() {
+        final int iterations = 10000;
         ListSyncProcessor processor = new ListSyncProcessor(new ArrayList<>());
 
-        Thread t1 = new ListRemoveThreadT5(processor);
-        Thread t2 = new ListAddThreadT5(processor);
+        Thread t1 = new ListRemoveThreadT5(processor, iterations);
+        Thread t2 = new ListAddThreadT5(processor, iterations);
 
         t1.start();
         t2.start();
@@ -87,11 +91,13 @@ public class MultithreadingDemo {
         }
     }
 
+    // fixme
     public static void task6() {
+        final int iterations = 10000;
         ListProcessor processor = new ListProcessor(Collections.synchronizedList(new ArrayList<>()));
 
-        Thread t1 = new ListRemoveThreadT6(processor);
-        Thread t2 = new ListAddThreadT6(processor);
+        Thread t1 = new ListRemoveThreadT6(processor, iterations);
+        Thread t2 = new ListAddThreadT6(processor, iterations);
 
         t1.start();
         t2.start();
@@ -105,10 +111,11 @@ public class MultithreadingDemo {
     }
 
     public static void task7() {
+        final int iterations = 20;
         Game game = new Game();
 
-        Thread ping = new PingThread(game);
-        Thread pong = new PongThread(game);
+        Thread ping = new PingThread(game, iterations);
+        Thread pong = new PongThread(game, iterations);
 
         ping.start();
         pong.start();
@@ -122,10 +129,11 @@ public class MultithreadingDemo {
     }
 
     public static void task8() {
+        final int iterations = 20;
         Book book = new Book();
 
-        ReaderThread reader = new ReaderThread(book);
-        WriterThread writer = new WriterThread(book);
+        ReaderThread reader = new ReaderThread(book, iterations);
+        WriterThread writer = new WriterThread(book, iterations);
 
         reader.start();
         writer.start();
@@ -139,10 +147,11 @@ public class MultithreadingDemo {
     }
 
     public static void task11() {
+        final int iterations = 20;
         GameRL game = new GameRL();
 
-        Thread ping = new PingThreadRL(game);
-        Thread pong = new PongThreadRL(game);
+        Thread ping = new PingThreadRL(game, iterations);
+        Thread pong = new PongThreadRL(game, iterations);
 
         ping.start();
         pong.start();

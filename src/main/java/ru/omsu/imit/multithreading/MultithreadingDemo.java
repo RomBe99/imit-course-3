@@ -3,6 +3,8 @@ package ru.omsu.imit.multithreading;
 import ru.omsu.imit.multithreading.task11.GameRL;
 import ru.omsu.imit.multithreading.task11.PingThreadRL;
 import ru.omsu.imit.multithreading.task11.PongThreadRL;
+import ru.omsu.imit.multithreading.task13.Formatter;
+import ru.omsu.imit.multithreading.task13.FormatterThread;
 import ru.omsu.imit.multithreading.task3.ThreadFirstThread;
 import ru.omsu.imit.multithreading.task3.ThreadSecondThread;
 import ru.omsu.imit.multithreading.task3.ThreadThirdThread;
@@ -23,6 +25,7 @@ import ru.omsu.imit.multithreading.task8.WriterThread;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 public class MultithreadingDemo {
@@ -156,6 +159,32 @@ public class MultithreadingDemo {
         try {
             ping.join();
             pong.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void task13() {
+        Formatter formatter = new Formatter();
+
+        FormatterThread t1 = new FormatterThread(new Date(), formatter);
+        FormatterThread t2 = new FormatterThread(new Date(), formatter);
+        FormatterThread t3 = new FormatterThread(new Date(), formatter);
+        FormatterThread t4 = new FormatterThread(new Date(), formatter);
+        FormatterThread t5 = new FormatterThread(new Date(), formatter);
+
+        t1.start();
+        t2.start();
+        t3.start();
+        t4.start();
+        t5.start();
+
+        try {
+            t1.join();
+            t2.join();
+            t3.join();
+            t4.join();
+            t5.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

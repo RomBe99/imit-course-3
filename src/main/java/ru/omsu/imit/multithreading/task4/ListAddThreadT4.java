@@ -17,16 +17,10 @@ public class ListAddThreadT4 extends Thread {
 
         for (int i = 0; i < iterations; i++) {
             synchronized (list) {
-                if (!list.isEmpty()) {
-                    continue;
-                }
-
                 n = (int) (Math.random() * 10);
 
-                for (int j = 0; j < 10; j++) {
-                    list.add(n);
-                    System.out.println(n);
-                }
+                list.add(n);
+                System.out.println(n);
             }
         }
     }

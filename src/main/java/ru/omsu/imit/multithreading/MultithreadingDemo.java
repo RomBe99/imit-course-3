@@ -54,12 +54,11 @@ public class MultithreadingDemo {
         }
     }
 
-    // fixme
     public static void task4() {
         final int iterations = 10000;
         List<Integer> list = new ArrayList<>();
-        Thread t1 = new ListRemoveThreadT4(list, iterations);
-        Thread t2 = new ListAddThreadT4(list, iterations);
+        Thread t1 = new ListAddThreadT4(list, iterations);
+        Thread t2 = new ListRemoveThreadT4(list, iterations);
 
         t1.start();
         t2.start();
@@ -72,13 +71,12 @@ public class MultithreadingDemo {
         }
     }
 
-    // fixme
     public static void task5() {
         final int iterations = 10000;
         ListSyncProcessor processor = new ListSyncProcessor(new ArrayList<>());
 
-        Thread t1 = new ListRemoveThreadT5(processor, iterations);
-        Thread t2 = new ListAddThreadT5(processor, iterations);
+        Thread t1 = new ListAddThreadT5(processor, iterations);
+        Thread t2 = new ListRemoveThreadT5(processor, iterations);
 
         t1.start();
         t2.start();
@@ -91,13 +89,12 @@ public class MultithreadingDemo {
         }
     }
 
-    // fixme
     public static void task6() {
         final int iterations = 10000;
         ListProcessor processor = new ListProcessor(Collections.synchronizedList(new ArrayList<>()));
 
-        Thread t1 = new ListRemoveThreadT6(processor, iterations);
-        Thread t2 = new ListAddThreadT6(processor, iterations);
+        Thread t1 = new ListAddThreadT6(processor, iterations);
+        Thread t2 = new ListRemoveThreadT6(processor, iterations);
 
         t1.start();
         t2.start();

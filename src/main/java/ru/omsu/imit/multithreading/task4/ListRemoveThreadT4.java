@@ -17,11 +17,13 @@ public class ListRemoveThreadT4 extends Thread {
 
         for (int i = 0; i < iterations; i++) {
             synchronized (list) {
-                for (int j = 0; !list.isEmpty(); j++) {
-                    n = (int) (Math.random() * (10 - j));
-                    System.out.println("Item numbered " + n);
-                    list.remove(n);
+                if (list.isEmpty()) {
+                    continue;
                 }
+
+                n = (int) (Math.random() * list.size());
+                System.out.println("Item numbered " + n);
+                list.remove(n);
             }
         }
     }

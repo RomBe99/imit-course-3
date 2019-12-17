@@ -10,25 +10,19 @@ public class ListSyncProcessor {
     }
 
     public synchronized void removeRandomElement() {
-        int n;
-
-        for (int i = 0; !list.isEmpty(); i++) {
-            n = (int) (Math.random() * (10 - i));
-            System.out.println("item numbered " + n);
-            list.remove(n);
-        }
-    }
-
-    public synchronized void addRandomElem(){
-        if(!list.isEmpty()) {
+        if (list.isEmpty()) {
             return;
         }
 
+        int n = (int) (Math.random() * list.size());
+        System.out.println("Item numbered " + n);
+        list.remove(n);
+    }
+
+    public synchronized void addRandomElem(){
         int n = (int) (Math.random() * 10);
 
-        for (int i = 0; i < 10; i++) {
-            list.add(n);
-            System.out.println(n);
-        }
+        list.add(n);
+        System.out.println(n);
     }
 }

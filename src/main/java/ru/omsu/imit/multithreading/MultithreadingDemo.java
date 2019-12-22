@@ -5,6 +5,7 @@ import ru.omsu.imit.multithreading.task11.PingThreadRL;
 import ru.omsu.imit.multithreading.task11.PongThreadRL;
 import ru.omsu.imit.multithreading.task13.Formatter;
 import ru.omsu.imit.multithreading.task13.FormatterThread;
+import ru.omsu.imit.multithreading.task14.DepartureSystem;
 import ru.omsu.imit.multithreading.task3.ThreadFirstThread;
 import ru.omsu.imit.multithreading.task3.ThreadSecondThread;
 import ru.omsu.imit.multithreading.task3.ThreadThirdThread;
@@ -167,11 +168,11 @@ public class MultithreadingDemo {
     public static void task13() {
         Formatter formatter = new Formatter();
 
-        FormatterThread t1 = new FormatterThread(new Date(), formatter);
-        FormatterThread t2 = new FormatterThread(new Date(), formatter);
-        FormatterThread t3 = new FormatterThread(new Date(), formatter);
-        FormatterThread t4 = new FormatterThread(new Date(), formatter);
-        FormatterThread t5 = new FormatterThread(new Date(), formatter);
+        Thread t1 = new FormatterThread(new Date(), formatter);
+        Thread t2 = new FormatterThread(new Date(), formatter);
+        Thread t3 = new FormatterThread(new Date(), formatter);
+        Thread t4 = new FormatterThread(new Date(), formatter);
+        Thread t5 = new FormatterThread(new Date(), formatter);
 
         t1.start();
         t2.start();
@@ -188,5 +189,11 @@ public class MultithreadingDemo {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void task14() {
+        DepartureSystem departureSystem = new DepartureSystem();
+
+        departureSystem.mailing();
     }
 }

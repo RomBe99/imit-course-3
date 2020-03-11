@@ -1,43 +1,53 @@
 package ru.omsu.imit.multithreading.task17;
 
-import ru.omsu.imit.multithreading.task16.Executable;
-
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.BlockingQueue;
 
 public class DeveloperThread extends Thread {
-    private BlockingQueue<Task> queue;
-    private BlockingQueue<Event> eventQueue;
+    private BlockingQueue<Task> tasks;
+    private BlockingQueue<TaskState> states;
+    private int count;
 
-    public DeveloperThread(BlockingQueue<Task> queue, BlockingQueue<Event> eventQueue) {
-        this.queue = queue;
-        this.eventQueue = eventQueue;
+    public DeveloperThread(BlockingQueue<Task> tasks, BlockingQueue<TaskState> states, int count) {
+        this.tasks = tasks;
+        this.states = states;
+        this.count = count;
+    }
+
+    private Task addTask(int subjectCount, int stageCount) {
+        Task task = new Task("Subject" + subjectCount, new ArrayList<>());
+        int stageNumber;
+
+        for (int i = 0; i < stageCount; i++) {
+            stageNumber = (int) (Math.random() * 10);
+
+            task.getStages().add(new Task("Stage №" + stageNumber, null));
+        }
+
+        return task;
     }
 
     @Override
     public void run() {
-        List<Executable> list;
-        int size;
-        Task task;
+        int subjectCount;
+        int stageCount;
 
-        try {
-            for (int i = 0; i < 5; i++) {
-                list = new ArrayList<>();
-                size = 5;
+        for (int i = 0; i < count; i++) {
+            try {
+                System.out.println("Developer(" + getId() + ")" + " add new task");
 
-                for (int j = 0; j < size; j++) {
-                    list.add(new Task(String.valueOf(getId()), j));
-                }
+                subjectCount = (int) (Math.random() * 10);
+                stageCount = (int) (Math.random() * 3);
 
-                task = new Task(list);
-                sleep(500);
-                queue.put(task);
+                tasks.put(addTask(subjectCount, stageCount));
+                states.put(TaskState.DEVELOPER_ADD_NEW_TASK);
+
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-
-            eventQueue.put(Event.WRITER_ENDED);
-        } catch (InterruptedException ex) {
-            System.out.println(ex.getMessage());
         }
+
+        System.out.println("Developer(" + getId() + ") " + "finished");
     }
 }

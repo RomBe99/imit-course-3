@@ -3,34 +3,42 @@ package ru.omsu.imit.multithreading.task17;
 import java.util.concurrent.BlockingQueue;
 
 public class ExecutorThread extends Thread {
-    private BlockingQueue<Task> queue;
-    private BlockingQueue<Event> eventQueue;
+    private BlockingQueue<Task> tasks;
+    private BlockingQueue<TaskState> states;
 
-    public ExecutorThread(BlockingQueue<Task> queue, BlockingQueue<Event> eventQueue) {
-        this.queue = queue;
-        this.eventQueue = eventQueue;
+    public ExecutorThread(BlockingQueue<Task> tasks, BlockingQueue<TaskState> states) {
+        this.tasks = tasks;
+        this.states = states;
     }
 
     @Override
     public void run() {
+        Task task;
+
         while (true) {
             try {
-                Task task = queue.take();
-                task.execute();
+                task = tasks.take();
 
-                if (!task.isEnd()) {
-                    queue.put(task);
-                    continue;
+                if (Task.poison.equals(task)) {
+                    break;
                 }
-            } catch (InterruptedException ex) {
-                System.out.println(ex.getMessage());
-            }
 
-            try {
-                eventQueue.put(Event.TASK_ENDED);
+                System.out.println("Executor(" + getId() + ") " + "read");
+
+                if (!task.getStages().isEmpty()) {
+                    task.getStages().get(0).execute();
+                    task.getStages().remove(0);
+
+                    tasks.put(task);
+                    states.put(TaskState.EXECUTOR_START_TASK);
+                } else {
+                    states.put(TaskState.EXECUTOR_COMPLETE_TASK);
+                }
             } catch (InterruptedException e) {
-                break;
+                e.printStackTrace();
             }
         }
+
+        System.out.println("Executor(" + getId() + ") " + "finished");
     }
 }
